@@ -1,0 +1,91 @@
+<div class="container">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			User settings
+		</div>
+		<div class="panel-body">
+			<form class="form-horizontal">
+				<div class="form-group">
+					<label class="col-sm-3 control-label">Login</label>
+					<div class="col-sm-9">
+						<p class="form-control-static">{{user.user.user_id}}</p>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="useremail" class="col-sm-3 control-label">Email address</label>
+					<div class="col-sm-9">
+						<input type="email" class="form-control" id="useremail" placeholder="Email" ng-model="user.user.email">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="username" class="col-sm-3 control-label">Display name</label>
+					<div class="col-sm-9">
+						<input type="text" class="form-control" id="username" placeholder="Name" ng-model="user.user.display_name">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-3 col-sm-9">
+						<button type="submit" class="btn btn-primary disabled">Save</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	
+	<!--
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			Import / export
+		</div>
+		<div class="panel-body">
+			<p>Import or export your data. This may be usefull to hava a backup of all your widgets, to move from one installation to an other, ...</p>
+			<p>Be carefull: importing data will override all your current tabs and settings !</p>
+			<form class="form-horizontal">
+				<div class="form-group">
+					<div class="col-sm-offset-4 col-sm-1">
+						<button type="submit" class="btn btn-primary" ng-click="settings.export()">Export</button>
+					</div>
+					<div class="col-sm-offset-1 col-sm-1">
+						<button type="submit" class="btn btn-warning" ng-click="settings.import()">Import</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	-->
+
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			External services
+		</div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-sm-4" ng-repeat="account in settings.accounts">
+					<div class="thumbnail">
+						<!--<img src="..." alt="...">-->
+						<div class="caption">
+							<h3>{{settings.serviceTitle(account.provider_name)}}</h3>
+							<p>Your Okihome account is connected to your {{settings.serviceTitle(account.provider_name)}} account: {{account.account_id}}.</p>
+							<p>
+								<a href="#" ng-click="settings.disconnect($event, $index)" class="btn btn-default">Disconnect</a>
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-4" ng-repeat="service in settings.services">
+					<div class="thumbnail">
+						<!--<img src="..." alt="...">-->
+						<div class="caption">
+							<h3>{{service.title}}</h3>
+							<p>Connect your Okihome account to your {{service.title}} account.</p>
+							<p>
+								<a href="#" ng-click="settings.connect($event, service)" class="btn btn-primary">Connect</a>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</div>

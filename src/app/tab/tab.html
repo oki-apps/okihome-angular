@@ -1,0 +1,24 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-6">
+			<div class="row">
+				<div class="col-lg-6" dragula='"widget-bag"' style="min-height:2em;" dragula-model='tab.widgets[0]'>
+					<oki-widget widget="widget" tab="tab.tabId" user="tab.userId" on-remove="tab.removeWidget(widgetId)" unread-count="tab.addUnreadCount(count)" ng-repeat="widget in tab.widgets[0]" />
+				</div>
+				<div class="col-lg-6" dragula='"widget-bag"' style="min-height:2em;" dragula-model='tab.widgets[1]'>
+					<oki-widget widget="widget" tab="tab.tabId" user="tab.userId" on-remove="tab.removeWidget(widgetId)" unread-count="tab.addUnreadCount(count)" ng-repeat="widget in tab.widgets[1]" />
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<div class="row">
+				<div class="col-lg-6" dragula='"widget-bag"' style="min-height:2em;" dragula-model='tab.widgets[2]'>
+					<oki-widget widget="widget" tab="tab.tabId" user="tab.userId" on-remove="tab.removeWidget(widgetId)" unread-count="tab.addUnreadCount(count)" ng-repeat="widget in tab.widgets[2]" />
+				</div>
+				<div class="col-lg-6" dragula='"widget-bag"' style="min-height:2em;" dragula-model='tab.widgets[3]'>
+					<oki-widget widget="widget" tab="tab.tabId" user="tab.userId" on-remove="tab.removeWidget(widgetId)" unread-count="tab.addUnreadCount(count)" ng-repeat="widget in tab.widgets[3]" />
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

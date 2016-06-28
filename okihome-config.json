@@ -1,0 +1,15 @@
+{
+  "local": {
+    "urls" : {
+      "BASE": "//localhost:8585",
+      "BASE_API": "//localhost:8585/api"
+    }
+  },
+  "prod": {
+    "urls" : {
+      "BASE": "//home.okiapps.com",
+      "BASE_API": "//home.okiapps.com/api"
+    }
+  }
+  
+}

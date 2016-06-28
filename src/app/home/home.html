@@ -1,0 +1,109 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+	<div class="navbar-header">
+	  <button type="button" class="navbar-toggle" ng-click="isExpanded = !isExpanded" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+		<span class="sr-only">Toggle navigation</span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+	  </button>
+	  <a class="navbar-brand" href="#"><span><img src="assets/images/okihome24.png" /> <strong>Okihome {{home.version}}</strong></span></a>
+	</div>
+	<div id="navbar" class="navbar-collapse" uib-collapse="!isExpanded">
+	  <ul class="nav navbar-nav navbar-right">
+		<li><a ui-sref="signup">Sign up</a></li>
+		<li><a ui-sref="help"><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Help</a></li>
+	  </ul>
+	</div>
+  </div>
+</nav>
+
+<div class="container">    
+	<div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+		<div class="panel panel-info" >
+			<div class="panel-heading clearfix">
+				<div class="panel-title">Sign in to Okihome</div>
+				<div class="pull-right">
+					<small>
+						<a ui-sref="forgotpassword">Forgot password?</a>
+					</small>
+				</div>
+			</div>     
+
+			<div class="panel-body" >
+				<div id="login-alert" class="alert alert-danger col-sm-12" ng-if="home.errorMsg">
+					{{home.errorMsg}}
+				</div>
+
+				<form id="loginform" class="form-horizontal" role="form">
+
+					<div class="form-group">
+						<div class="col-sm-12">
+							<div class="input-group">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+								<input id="login-username" type="text" class="form-control" name="username" value="" placeholder="username or email" ng-model="home.username">                                        
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-sm-12">
+							<div class="input-group">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+								<input id="login-password" type="password" class="form-control" name="password" placeholder="password" ng-model="home.password">
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-sm-12">
+							<div class="input-group">
+								<div class="checkbox">
+									<label>
+										<input id="login-remember" type="checkbox" name="remember" value="1" ng-model="home.rememberMe"> Remember me
+									</label>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					
+					<div class="form-group">
+						<div class="col-sm-12">
+							<button id="btn-login" class="btn btn-success btn-block" ng-click="home.login()">Login</button>
+						</div>
+					</div>
+
+					<div class="form-group ng-hide">
+						<div style="text-align:center;">
+							<span class="breakthrough"> or simply use </span>
+						</div>
+					</div>
+
+					<div class="form-group ng-hide">
+						<div class="col-xs-4">
+							<a id="btn-fblogin" href="#" class="btn btn-primary btn-block">Facebook</a>
+						</div>
+						<div class="col-xs-4">
+							<a id="btn-fblogin" href="#" class="btn btn-primary btn-block">Twitter</a>
+						</div>
+						<div class="col-xs-4">
+							<a id="btn-fblogin" href="#" class="btn btn-primary btn-block">Google</a>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-md-12 control">
+							<small>
+								Don't have an account! 
+								<a ui-sref="signup">
+									Sign Up Here
+								</a>
+							</small>
+						</div>
+					</div>
+				</form>     
+			</div>                     
+		</div>
+	</div>
+</div>

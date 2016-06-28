@@ -1,0 +1,88 @@
+/*
+ * Base structure
+ */
+
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  padding-top: 64px;
+  
+  background: url("../assets/images/bg-pehoe.jpg") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.panel {
+	background-color: rgba(255, 255, 255, 0.9);
+}
+.panel > .panel-heading {
+	background-color: rgba(255, 255, 255, 0.9);
+}
+/* latin */
+@font-face {
+  font-family: 'Gloria Hallelujah';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Gloria Hallelujah'), local('GloriaHallelujah'), url(//fonts.gstatic.com/s/gloriahallelujah/v8/CA1k7SlXcY5kvI81M_R28cNDay8z-hHR7F16xrcXsJw.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+
+.navbar-brand {
+	font-family: 'Gloria Hallelujah', cursive;
+}
+.brand {
+	font-family: 'Gloria Hallelujah', cursive;
+}
+
+.browsehappy {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+.thumbnail {
+  height: 200px;
+}
+
+.thumbnail img.pull-right {
+  width: 50px;
+}
+
+span.breakthrough { 
+    overflow: hidden;
+    text-align: center;
+}
+
+span.breakthrough:before,
+span.breakthrough:after {
+    background-color: #000;
+    content: "";
+    display: inline-block;
+    height: 1px;
+    position: relative;
+    vertical-align: middle;
+    width: 30%;
+}
+span.breakthrough:before {
+    right: 0.5em;
+    margin-left: -30%;
+}
+span.breakthrough:after {
+    left: 0.5em;
+    margin-right: -30%;
+}
+
+.unread {
+	font-weight:bold;
+}
+.pager {
+	margin: 0;
+}
+.panel {
+	margin-bottom:1em;
+}
+.panel table {
+	margin-bottom: 0;
+}

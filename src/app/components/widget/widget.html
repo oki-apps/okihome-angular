@@ -1,0 +1,40 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		{{vm.widget.config.title}}
+		<div class="pull-right">
+			<span class="badge" ng-if="vm.widget.widgetData.unreadItems">
+				<a href="#" ng-click="vm.markAllRead($event)" ng-if="vm.widgetType.allowMarkAllRead()">{{vm.widget.widgetData.unreadItems}}</a>
+				<span ng-if="!vm.widgetType.allowMarkAllRead()">{{vm.widget.widgetData.unreadItems}}</span>
+			</span>
+			<div class="btn-group btn-group-xs" role="group" aria-label="Actions">
+				<button type="button" class="btn btn-default" ng-click="vm.refresh()"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button>
+				<div class="btn-group btn-group-xs" role="group" uib-dropdown>
+					<button type="button" class="btn btn-default" uib-dropdown-toggle aria-haspopup="true" aria-expanded="false">
+						<span class="caret" aria-hidden="true"></span>
+					</button>
+					<ul uib-dropdown-menu class="dropdown-menu-right">
+						<li><a href="#" ng-click="vm.startEditing($event)"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Settings</a></li>
+						<li><a href="#" ng-click="vm.remove($event)"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Remove</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<oki-widget-content widget-type="{{vm.widget.widgetType}}" ng-if="!vm.editMode"></oki-widget-content>
+	<div class="panel-body" ng-if="vm.editMode">
+		<form>
+			<div class="form-group">
+				<label for="inputTitle">Title</label>
+				<input type="text" class="form-control" id="inputTitle" placeholder="Title" ng-model="vm.editedWidget.title" autofocus />
+			</div>
+			<div class="form-group">
+				<label for="inputDisplayCount">Items count</label>
+				<input type="number" min=1 step=1 class="form-control" id="inputDisplayCount" placeholder="Items count" ng-model="vm.editedWidget.display_count" autofocus />
+			</div>
+			<div class="form-group">
+				<button class="btn btn-primary" type="button" ng-click="vm.editOk()">OK</button>
+				<button class="btn btn-warning" type="button" ng-click="vm.editCancel()">Cancel</button>
+			</div>
+		</form>
+	</div>
+</div>

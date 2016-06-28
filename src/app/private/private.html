@@ -1,0 +1,135 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+	<div class="navbar-header">
+	  <button type="button" class="navbar-toggle" ng-click="isExpanded = !isExpanded" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+		<span class="sr-only">Toggle navigation</span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+	  </button>
+	  <a class="navbar-brand" href="#"><span><img src="assets/images/okihome24.png" /> <strong>Okihome {{private.version}}</strong></span></a>
+	</div>
+	<div id="navbar" class="navbar-collapse" uib-collapse="!isExpanded">
+	  <ul class="nav navbar-nav">
+		<li ng-class="{active: tab.id == private.currentTabId}" ng-repeat="tab in user.tabs"><a ui-sref="private.tab({tabId: tab.id})">{{tab.title}} <span class="badge" ng-if="tab.id == private.currentTabId">{{tab.unreadCount}}</span></a></li>
+		<li uib-dropdown>
+			<a href="#" uib-dropdown-toggle data-toggle="dropdown" 
+				role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+			<ul uib-dropdown-menu>
+				<li ng-if="private.currentTabId"><a href="#" ng-click="private.addFeed($event)"><span class="glyphicon glyphicon-list" aria-hidden="true"></span> Add feed</a></li>
+				<li ng-hide="true"><a href="#" ng-click="private.addSocialApp($event)"><span class="glyphicon glyphicon-link" aria-hidden="true"></span> Add social app</a></li>
+				<li ng-if="private.currentTabId"> <a href="#" ng-click="private.addEmail($event)"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Add email</a></li>
+				<li role="separator" class="divider"></li>
+				<li><a href="#" ng-click="private.addTab($event)"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> New tab</a></li>
+			</ul>
+		</li>
+	  </ul>
+	  <ul class="nav navbar-nav navbar-right">
+		<li ng-if="private.currentTabId"><a ui-sref="private.tabsettings({tabId: private.currentTabId})"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Tab settings</a></li>
+		<li uib-dropdown>
+			<a href="#" uib-dropdown-toggle data-toggle="dropdown" 
+				role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{user.user.display_name}}</a>
+			<ul uib-dropdown-menu>
+				<li><a ui-sref="private.settings"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Settings</a></li>
+				<li><a href="#" ng-click="private.logout()"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Logout</a></li>
+			</ul>
+		</li>
+		<li ng-hide="true"><a ui-sref="help"><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Help</a></li>
+	  </ul>
+	</div>
+  </div>
+</nav>
+
+<div ui-view></div>
+
+<script type="text/ng-template" id="modalAddFeed.html">
+	<div class="modal-header">
+		<h3 class="modal-title"><span class="glyphicon glyphicon-list" aria-hidden="true"></span> Add feed</h3>
+	</div>
+	<div class="modal-body">
+		<form>
+			<div class="form-group">
+				<label for="inputFeedUrl">Feed URL</label>
+				<div class="input-group">
+					<input type="url" class="form-control" id="inputFeedUrl" placeholder="URL" ng-model="vm.url" autofocus>
+					<span class="input-group-btn">
+						<button class="btn btn-default" type="button" ng-click="vm.preview()">Preview</button>
+					</span>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="modal-body clearfix">
+		<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3" ng-if="vm.widgetTitle">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					{{vm.widgetTitle}}
+				</div>
+				<table class="table table-condensed">
+					<tr ng-repeat="item in vm.items | paginate:vm.currentPage:vm.itemsPerPage">
+						<td>
+							<a href="{{item.link}}" target="_blank" class="unread">{{item.title}}</a> 
+								<small>{{item.published | amTimeAgo}}</small> 
+							</td>
+					</tr>
+					<tr>
+						<td>
+							<small>
+								<uib-pager items-per-page="5" total-items="vm.items.length" ng-model="vm.currentPage"></uib-pager>
+							</small>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer ">
+		<button class="btn btn-primary" type="button" ng-click="vm.ok()">OK</button>
+		<button class="btn btn-warning" type="button" ng-click="vm.cancel()">Cancel</button>
+	</div>
+</script>
+
+
+<script type="text/ng-template" id="modalAddEmail.html">
+	<div class="modal-header">
+		<h3 class="modal-title"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Add email</h3>
+	</div>
+	<div class="modal-body">
+		<form>
+			<div class="form-group">
+				<label for="inputProvider">Provider</label>
+				<select class="form-control" name="inputProvider" id="inputProvider"
+					ng-options="svc.title for svc in vm.services track by svc.name"
+					ng-model="vm.selectedProvider" ng-change="vm.displayAccounts()" ></select>
+			</div>
+			<div class="form-group">
+				<label for="inputAccount">Account</label>
+				<select class="form-control" name="inputAccount" id="inputAccount" ng-disabled="!vm.selectedProvider"
+					ng-options="acc.account_id for acc in vm.accounts track by acc.id"
+					ng-model="vm.selectedAccount" ></select>
+			</div>
+		</form>
+	</div>
+	<div class="modal-footer ">
+		<button class="btn btn-primary" type="button" ng-click="vm.ok()">OK</button>
+		<button class="btn btn-warning" type="button" ng-click="vm.cancel()">Cancel</button>
+	</div>
+</script>
+
+<script type="text/ng-template" id="modalAddTab.html">
+	<div class="modal-header">
+		<h3 class="modal-title"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add tab</h3>
+	</div>
+	<div class="modal-body">
+		<form>
+			<div class="form-group">
+				<label for="inputTitle">Title</label>
+				<input type="text" class="form-control" id="inputTitle" placeholder="Tab title" ng-model="vm.title" autofocus>
+			</div>
+		</form>
+	</div>
+	<div class="modal-footer ">
+		<button class="btn btn-primary" type="button" ng-click="vm.ok()">OK</button>
+		<button class="btn btn-warning" type="button" ng-click="vm.cancel()">Cancel</button>
+	</div>
+</script>

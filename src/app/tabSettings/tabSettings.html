@@ -1,0 +1,42 @@
+<div class="container">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			Tab settings
+		</div>
+		<div class="panel-body">
+			<form class="form-horizontal">
+				<div class="form-group">
+					<label for="tabtitle" class="col-sm-3 control-label">Title</label>
+					<div class="col-sm-9">
+						<input type="text" class="form-control" id="tabtitle" placeholder="Tab title" ng-model="vm.editedTab.title">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-3 col-sm-9">
+						<button type="submit" class="btn btn-primary" ng-click="vm.editTab()">Save</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			Delete
+		</div>
+		<div class="panel-body">
+			<form class="form-horizontal">
+				<div class="form-group">
+					<div class="col-sm-12">
+						<p class="form-control-static">Do you want to permanently delete the tab '{{::vm.tab.title}}'? This operation can't be reverted.</p>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-3 col-sm-9">
+						<button type="submit" class="btn btn-danger" ng-click="vm.deleteTab()">Delete</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

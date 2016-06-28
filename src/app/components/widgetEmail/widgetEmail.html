@@ -1,0 +1,15 @@
+<table class="table table-condensed">
+	<tr ng-repeat="item in vm.widget.widgetData.items | paginate:vm.currentPage:vm.widget.config.display_count">
+		<td>
+			<a href="{{item.link}}" target="_blank" ng-class="{unread: !item.read}">{{item.from}} - {{item.title}}</a> 
+			<small>{{item.published | amTimeAgo}}</small> 
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<small>
+				<uib-pager items-per-page="vm.widget.config.display_count" total-items="vm.widget.widgetData.items.length" ng-model="vm.currentPage"></uib-pager>
+			</small>
+		</td>
+	</tr>
+</table>
