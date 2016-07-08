@@ -38,7 +38,8 @@
   function WidgetRssFeedController($log, $scope, okihomeApi, toastr) {
 		
 	var readItem = function(item) {
-		$log.debug("mark as read", item);
+		if(!item.read) {
+			$log.debug("mark as read", item);
 		item.read = true;
 		$scope.vm.widget.widgetData.unreadItems--;
 		$scope.vm.unreadCount({count:-1});
@@ -51,11 +52,10 @@
 			$scope.vm.widget.widgetData.unreadItems++;
 			$scope.vm.unreadCount({count:+1});
 		});
+		}
 	};
 	
-	$scope.readItem = function(item) {
-		readItem(item);
-	}
+	$scope.readItem = readItem;
 	
 	$scope.$on('markAllRead', function(){
 		$log.debug('markAllRead');
