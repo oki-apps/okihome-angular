@@ -1,6 +1,7 @@
 <div class="panel panel-default">
 	<div class="panel-heading">
-		{{vm.widget.config.title}}
+		<a ng-if="vm.widget.config.link" href="{{vm.widget.config.link}}" target="_blank">{{vm.widget.config.title}}</a>
+		<span ng-if="!vm.widget.config.link" >{{vm.widget.config.title}}</span>
 		<div class="pull-right">
 			<span class="badge" ng-if="vm.widget.widgetData.unreadItems">
 				<a href="#" ng-click="vm.markAllRead($event)" ng-if="vm.widgetType.allowMarkAllRead()">{{vm.widget.widgetData.unreadItems}}</a>
