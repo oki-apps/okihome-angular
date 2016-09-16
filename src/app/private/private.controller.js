@@ -137,6 +137,11 @@
 	vm.currentTabId = undefined;
 	$scope.setCurrentTabId = function(tabId) {
 		$log.debug("setCurrentTabId: ", tabId)
+		$scope.user.tabs.forEach(function(t) {
+			if(t.id == tabId) {
+					t.unreadCount=0;
+			}
+		});
 		vm.currentTabId = tabId;
 	};
 	$scope.unsetCurrentTabId = function(tabId) {
