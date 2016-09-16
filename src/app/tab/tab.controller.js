@@ -21,6 +21,18 @@
 	}
 	
 	vm.widgets = [{},{},{},{}];
+	var oldLayout = [];
+	var computeLayout = function() {
+		var widgetLayout = [];
+		for(var col=0; col<vm.widgets.length; col ++){
+			var ids = []
+			for(var i=0; i<vm.widgets[col].length; i++){
+				ids.push(vm.widgets[col][i].id);
+			}
+			widgetLayout.push(ids);
+		}
+		return widgetLayout;
+	}
 	
 	vm.updateLayout = function(data){
 		$log.debug('updateLayout requested', data);
@@ -29,6 +41,9 @@
 			$log.debug('Tab retrieved',data);
 			vm.tab = data.data;
 			vm.widgets = vm.tab.widgets;
+
+			oldLayout = computeLayout();
+			$log.debug('Old layout computed',oldLayout);
 		},function(err){
 			toastr.error('Failed updating layout');
 			$log.error(err);
@@ -51,23 +66,27 @@
 	
 	var saveLayout = function() {
 		
-		var widgetLayout = []
-		for(var col=0; col<vm.widgets.length; col ++){
-			var ids = []
-			for(var i=0; i<vm.widgets[col].length; i++){
-				ids.push(vm.widgets[col][i].id)
-			}
-			widgetLayout.push(ids)
-		}
+		var widgetLayout = computeLayout();
+		$log.debug('New layout computed',widgetLayout,oldLayout);
 		
-		$log.debug("Saving layout", widgetLayout);
-		okihomeApi.saveLayout(vm.tabId, widgetLayout, function(data){
-			toastr.success('New layout saved');
-			$log.debug("layout saved", data);
-		}, function(err) {
-			toastr.error('Unable to save the new layout');
-			$log.error("layout saving error", err);
-		});
+		if(!angular.equals(oldLayout,widgetLayout))
+		{
+			var previousLayout = oldLayout;
+			oldLayout = widgetLayout;
+			$log.debug("Saving layout", widgetLayout);
+			okihomeApi.saveLayout(vm.tabId, widgetLayout, function(data){
+				toastr.success('New layout saved');
+				$log.debug("layout saved", data);
+			}, function(err) {
+				toastr.error('Unable to save the new layout');
+				$log.error("layout saving error", err);
+				oldLayout = previousLayout;
+			});
+		}
+		else
+		{
+			$log.debug("No change in layout", widgetLayout);
+		}
 	}
 	
 	
